@@ -27,18 +27,18 @@ def load_checkpoints(config_path, checkpoint_path):
 
     generator = OcclusionAwareSPADEGenerator(**config["model_params"]["generator_params"], **config["model_params"]["common_params"])
     # convert to half precision to speed up
-    generator.cuda().half()
+    #generator.cuda().half()
 
     kp_detector = KPDetector(**config["model_params"]["kp_detector_params"], **config["model_params"]["common_params"])
     # the result will be wrong if converted to half precision, not sure why
-    kp_detector.cuda()  # .half()
+    #kp_detector.cuda()  # .half()
 
     he_estimator = HEEstimator(**config["model_params"]["he_estimator_params"], **config["model_params"]["common_params"])
     # the result will be wrong if converted to half precision, not sure why
-    he_estimator.cuda()  # .half()
+    #he_estimator.cuda()  # .half()
 
     print("Loading checkpoints")
-    checkpoint = torch.load(checkpoint_path)
+    checkpoint = torch.load(checkpoint_path, map_location=torch.device('cpu'))
 
     generator.load_state_dict(checkpoint["generator"])
     kp_detector.load_state_dict(checkpoint["kp_detector"])
@@ -232,7 +232,7 @@ class FaceAnimationClass:
         source_image = cv2.cvtColor(cv2.imread(source_image_path), cv2.COLOR_RGB2BGR).astype(np.float32) / 255.
         source_image = cv2.resize(source_image, (256, 256), interpolation=cv2.INTER_AREA)
         source = torch.tensor(source_image[np.newaxis].astype(np.float32)).permute(0, 3, 1, 2)
-        self.source = source.cuda()
+        self.source = source #.cuda()
 
         # initilize face detectors
         self.face_detector = RetinaFace()

@@ -9,3 +9,5 @@ results/*
 *.lock
 !assets/*.mp4
 !tortoise/data/mel_norms.pth
+.myenv/**
+tortoise/voices/trump/*

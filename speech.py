@@ -43,17 +43,3 @@ def generate_speech(path_id, outfile, voice, text, speed="standard"):
  
 
 
-if __name__ == '__main__':
-    path_id = os.path.join("temp", "audio", str(int(time.time())))
-    os.makedirs(path_id, exist_ok=True)
-    tstart = time.time()
-    message = """Apple today confirmed that it will be permanently closing its Infinite Loop retail store in 
-Cupertino, California on January 20. Infinite Loop served as Apple's headquarters between the mid-1990s and 
-2017, when its current Apple Park headquarters opened a few miles away."""
-    generate_speech(os.path.join("audio", str(int(time.time()))), "christmas.wav", "train_grace", 
-                    message, "ultra_fast")
-        
-    # openai_generate_speech("speech.mp3", "onyx", 
-    #                 "Merry Christmas! May the holiday bring you endless joy, laughter, \
-    #                 and quality time with friends and family!")    
-    print("total time:", humanize.naturaldelta(dt.timedelta(seconds=int(time.time() - tstart))))

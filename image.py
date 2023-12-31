@@ -3,14 +3,24 @@ from diffusers import AutoPipelineForText2Image
 from argparse import ArgumentParser
 import humanize
 import datetime as dt
+from diffusers.pipelines.wuerstchen import DEFAULT_STAGE_C_TIMESTEPS
+
 
 def generate_image(path_id, imgfile, prompt):
-	pipe = AutoPipelineForText2Image.from_pretrained("stabilityai/sdxl-turbo")
-	image = pipe(prompt=prompt, num_inference_steps=4, guidance_scale=0.0).images[0]
+	pipe = AutoPipelineForText2Image.from_pretrained("warp-ai/wuerstchen")
+	image = pipe(
+	prompt,
+	height=1024,
+	width=1536,
+	prior_timesteps=DEFAULT_STAGE_C_TIMESTEPS,
+	prior_guidance_scale=4.0,
+	num_images_per_prompt=1,
+).images[0]
+	#image = pipe(prompt=prompt, num_inference_steps=4, guidance_scale=0.0).images[0]
 	image.save(os.path.join("temp", path_id, imgfile))
 
 def generate_images(path_id, imgfile, prompt, times=1):
-	pipe = AutoPipelineForText2Image.from_pretrained("stabilityai/sdxl-turbo")
+	pipe = AutoPipelineForText2Image.from_pretrained("warp-ai/wuerstchen")
 	for i in range(times):
 		image = pipe(prompt=prompt, num_inference_steps=1, guidance_scale=0.0).images[0]
 		image.save(os.path.join("temp", path_id, str(i) + "_" + imgfile))

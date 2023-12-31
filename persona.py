@@ -15,9 +15,7 @@ from animate_face import animate_face
 # message = """Over the holiday season, capturing photos and videos of the festivities with family and friends 
 # is an important activity for many. The iPhone has a suite of camera features that can significantly elevate 
 # the quality and creativity of your holiday photos and videos."""
-message = """Apple today confirmed that it will be permanently closing its Infinite Loop retail store in 
-Cupertino, California on January 20. Infinite Loop served as Apple's headquarters between the mid-1990s and 
-2017, when its current Apple Park headquarters opened a few miles away."""
+message = """I'm afraid for the calendar. Its days are numbered."""
 
 def main():
 	parser = ArgumentParser()
@@ -44,7 +42,7 @@ def main():
 			print("-----------------------------------------")
 			print("generating speech")
 			t0 = time.time()
-			generate_speech(path_id, audiofile, "daniel", message, "ultra_fast")
+			generate_speech(path_id, audiofile, "trump", message, "fast")
 			tspeech = humanize.naturaldelta(dt.timedelta(seconds=int(time.time() - t0)))
 			print("\ngenerating speech:", tspeech)
 		else:
@@ -57,7 +55,7 @@ def main():
 			print("-----------------------------------------")
 			print("generating avatar image")
 			t1 = time.time()
-			avatar_description = "Middle-aged black man, Idris Elba, with short dark hair, serious look"
+			avatar_description = "Old, Donald trump, with short blode hair, funny looking, talking to public. Outdoors. some trees in the background."
 			generate_image(path_id, imgfile, f"hyperrealistic digital avatar, centered, {avatar_description}, \
 						rim lighting, studio lighting, looking at the camera")
 			timage = humanize.naturaldelta(dt.timedelta(seconds=int(time.time() - t1)))
